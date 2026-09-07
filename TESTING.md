@@ -6,6 +6,8 @@ Start with useful changes in the user's project. The first goal is to discover w
 
 Install a fixed NanoSpec release and start a fresh task in the target project. Choose a small feature or bug with an observable outcome. No initialization skill is required.
 
+For the renamed skills, verify that a fresh installation exposes `nano-spec:apply`, `nano-spec:shape`, `nano-spec:explore`, and `nano-spec:check`, without duplicate `nanospec-` names. This installation check is pending; 0.3.0 still uses the old names.
+
 For the status workflow introduced after 0.2.0, use Shape when the brief needs preparation. Check that Codex gives the task a short `shape ...` title and presents the `draft` for human approval. Approve the current brief, then use Apply: the title should become `applying <change_name>`, implementation should use `in_progress`, and verified work should stop at `ready_for_acceptance` with evidence. Only human acceptance should set `done`. Use Explore for a real research question and Check when a separate review is useful; invoking all skills is not required. The 0.2.0 package predates these status rules; use 0.3.0 or later to test this workflow.
 
 Check the resulting behavior yourself. Record useful feedback in the conversation or the existing change; do not create a separate report for each run.

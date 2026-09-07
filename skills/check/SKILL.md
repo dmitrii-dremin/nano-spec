@@ -1,5 +1,5 @@
 ---
-name: nanospec-check
+name: check
 description: Assess whether a NanoSpec brief is sufficient or its implementation meets the requirements. Use for separate reviews and readiness checks; report findings without changing code or requirements by default.
 ---
 

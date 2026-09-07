@@ -2,7 +2,7 @@
 
 Ultra lightweight SDD framework. The minimum documentation needed to implement correctly, verify the result, and let another agent continue the work.
 
-Current version: **0.3.0**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
+Current version: **0.4.0**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
 
 ## Get started
 
@@ -10,10 +10,10 @@ Read the [philosophy](PHILOSOPHY.md), then choose the skill you need:
 
 | Skill | When to use it | Result |
 | --- | --- | --- |
-| [nanospec-explore](skills/nanospec-explore/SKILL.md) | Understand existing behavior and its history | A supported account of current behavior, historical intent, and material unknowns |
-| [nanospec-shape](skills/nanospec-shape/SKILL.md) | Clarify and prepare a task | A draft for human approval or a specific unresolved question |
-| [nanospec-apply](skills/nanospec-apply/SKILL.md) | Implement or resume an approved task | Verified implementation awaiting human acceptance; closure after acceptance |
-| [nanospec-check](skills/nanospec-check/SKILL.md) | Independently assess a brief or its implementation | Material gaps or a supported conclusion with verification limits |
+| [explore](skills/explore/SKILL.md) | Understand existing behavior and its history | A supported account of current behavior, historical intent, and material unknowns |
+| [shape](skills/shape/SKILL.md) | Clarify and prepare a task | A draft for human approval or a specific unresolved question |
+| [apply](skills/apply/SKILL.md) | Implement or resume an approved task | Verified implementation awaiting human acceptance; closure after acceptance |
+| [check](skills/check/SKILL.md) | Independently assess a brief or its implementation | Material gaps or a supported conclusion with verification limits |
 
 These are independent actions. Calling every skill is unnecessary: `explore` answers research questions, `apply` includes research and verification needed for its own work, and `check` supports a separate review.
 
@@ -27,16 +27,16 @@ Record known relationships to earlier changes inside the newer change, explainin
 
 ## Install in Codex
 
-With Codex CLI available, register the versioned repository marketplace and install the plugin:
+With Codex CLI available, register the repository marketplace and install the plugin:
 
 ```sh
-codex plugin marketplace add dmitrii-dremin/nano-spec --ref v0.3.0
+codex plugin marketplace add dmitrii-dremin/nano-spec
 codex plugin add nano-spec@nano-spec
 ```
 
-Then start a new task in your project. Restart Codex Desktop if the plugin is not visible. Select the installed NanoSpec skill in the skill picker, or ask the agent to use `nanospec-shape`, `nanospec-apply`, `nanospec-explore`, or `nanospec-check` explicitly. The host may display the plugin namespace alongside the skill name.
+Then start a new task in your project. Restart Codex Desktop if the plugin is not visible. Select the installed NanoSpec skill in the skill picker, or ask the agent to use `nano-spec:shape`, `nano-spec:apply`, `nano-spec:explore`, or `nano-spec:check` explicitly. Versions through 0.3.0 used `nano-spec:nanospec-<action>`; update existing invocations to the shorter names.
 
-The marketplace and its plugin source both pin `v0.3.0`; installation does not follow the development branch. These commands are supported by the locally checked Codex CLI 0.153.4. See the [Codex plugin documentation](https://developers.openai.com/plugins/build/plugins) for marketplace management. Installation and live skill behavior should be confirmed in the first run; schema validation alone does not prove either.
+The marketplace and plugin source follow the repository's default branch (`master`), without a pinned Git ref. Refresh the catalog and reinstall to pick up updates; SemVer versions and release tags identify releases without locking installation to them. These commands are supported by the locally checked Codex CLI 0.153.4. See the [Codex plugin documentation](https://developers.openai.com/plugins/build/plugins) for marketplace management. Installation and live skill behavior should be confirmed in the first run; schema validation alone does not prove either.
 
 To update a Git marketplace that tracks the repository's default branch, refresh its catalog and reinstall the plugin:
 
@@ -45,29 +45,29 @@ codex plugin marketplace upgrade nano-spec
 codex plugin add nano-spec@nano-spec
 ```
 
-If the marketplace was pinned to an older tag with `--ref`, refreshing preserves that pin. To switch it to this release, re-register the marketplace, then reinstall:
+If an earlier installation used `--ref`, remove that old pin once by re-registering the marketplace without it, then reinstall:
 
 ```sh
 codex plugin marketplace remove nano-spec
-codex plugin marketplace add dmitrii-dremin/nano-spec --ref v0.3.0
+codex plugin marketplace add dmitrii-dremin/nano-spec
 codex plugin add nano-spec@nano-spec
 ```
 
 Start a new task after updating so it loads the new skill instructions.
 
-There is no `nanospec-init` skill in 0.3.0. Begin with a real task; records are created only when needed.
+There is no `init` skill in 0.4.0. Begin with a real task; records are created only when needed.
 
 The folders in `skills/` are the package sources. Each skill is self-contained. To try a skill directly without installing the plugin, give the agent its path:
 
 ```text
-Read C:/Programming/nano-spec/skills/nanospec-shape/SKILL.md
+Read C:/Programming/nano-spec/skills/shape/SKILL.md
 and use it to prepare this task: ...
 Target repository: ...
 ```
 
-For implementation, provide `nanospec-apply/SKILL.md`, the task brief, and the target repository. These paths refer to this local checkout; substitute your NanoSpec path in another environment.
+For implementation, provide `skills/apply/SKILL.md`, the task brief, and the target repository. These paths refer to this local checkout; substitute your NanoSpec path in another environment.
 
-For another agent that supports Agent Plugins, install this repository's versioned package using that agent's installation mechanism. Alternatively, install the desired skill folders in the agent's skill directory. Keeping the sources in this repository does not install them in other projects. The skills require no NanoSpec CLI, MCP server, or runtime dependencies. Cross-agent installation has not yet been tested.
+For another agent that supports Agent Plugins, install this repository's package using that agent's installation mechanism. Alternatively, install the desired skill folders in the agent's skill directory. Keeping the sources in this repository does not install them in other projects. The skills require no NanoSpec CLI, MCP server, or runtime dependencies. Cross-agent installation has not yet been tested.
 
 Next: [practical evaluation](TESTING.md).
 
@@ -75,7 +75,7 @@ Next: [practical evaluation](TESTING.md).
 
 Agent Plugins is the selected package format for NanoSpec. Keep the portable skills in `skills/` as the canonical source so packaging does not create separate workflow implementations for different agents. This choice provides a plugin installation path while preserving direct use of individual skills.
 
-The root `plugin.json` declares the portable Agent Plugins package. `.codex-plugin/plugin.json` provides Codex compatibility metadata and points at the same skills. `.agents/plugins/marketplace.json` exposes the published Git source to Codex. Keep both manifest versions aligned with `VERSION`; the marketplace remains pinned to the published release during development and must be updated with the next release tag when publishing. Project initialization behavior is still being designed.
+The root `plugin.json` declares the portable Agent Plugins package. `.codex-plugin/plugin.json` provides Codex compatibility metadata and points at the same skills. `.agents/plugins/marketplace.json` exposes the repository Git source to Codex without a `ref`. Keep both manifest versions aligned with `VERSION`; keep installation commands and the catalog free of version pins unless the user explicitly requests a fixed version. Project initialization behavior is still being designed.
 
 ## Language
 

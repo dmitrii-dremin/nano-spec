@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0 — 2026-09-07
+
+- **Breaking:** shorten skill names and directories to `apply`, `shape`, `explore`, and `check`; Codex plugin invocations become `nano-spec:<action>`. Update existing invocation references and direct skill paths; no duplicate compatibility skills are shipped.
+
+- Remove the marketplace plugin-source ref and default installation pin; follow the repository default branch. Keep SemVer release identifiers and tags.
+
 ## 0.3.0 — 2026-09-07
 
 - **Breaking:** define one change `status` with six values: `draft`, `approved`, `in_progress`, `ready_for_acceptance`, `done`, and `canceled`.

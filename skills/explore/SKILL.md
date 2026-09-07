@@ -1,5 +1,5 @@
 ---
-name: nanospec-explore
+name: explore
 description: Investigate how an existing system capability works and why, using relevant NanoSpec changes, their relationships, current code, and evidence. Use for research and explanations before planning or implementation; do not turn exploration into a mandatory workflow stage.
 ---
 

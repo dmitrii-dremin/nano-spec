@@ -1,6 +1,6 @@
 ---
-name: nanospec-apply
-description: Implement or resume an authorized NanoSpec change, verify the result, and preserve necessary context. Use for implementation requests; a separate nanospec-shape invocation is not required.
+name: apply
+description: Implement or resume an authorized NanoSpec change, verify the result, and preserve necessary context. Use for implementation requests; a separate shape invocation is not required.
 ---
 
 # NanoSpec Apply

@@ -1,5 +1,5 @@
 ---
-name: nanospec-shape
+name: shape
 description: Prepare or clarify a NanoSpec task brief before implementation, defining behavior, constraints, and verification. A request to prepare a brief alone does not authorize implementation.
 ---
 
