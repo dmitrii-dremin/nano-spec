@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1 — 2026-09-07
+
+- Clarify the existing approval boundary: an implementation request approves what it and agreed references determine, not material product decisions the agent subsequently introduces. Routine technical choices within the agreed scope remain autonomous; task size alone adds no approval stage.
+- Align Apply, Shape, and Check with this boundary and add focused evaluation scenarios.
+
 ## 0.4.0 — 2026-09-07
 
 - **Breaking:** shorten skill names and directories to `apply`, `shape`, `explore`, and `check`; Codex plugin invocations become `nano-spec:<action>`. Update existing invocation references and direct skill paths; no duplicate compatibility skills are shipped.

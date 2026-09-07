@@ -14,6 +14,8 @@ Check the resulting behavior yourself. Record useful feedback in the conversatio
 
 When testing the new statuses, revise an approved brief, including a wording-only change: it should return to `draft` and await renewed human approval. Updating status or test evidence alone should preserve approval. Request implementation fixes at acceptance: unchanged requirements should return to `in_progress`, while revised requirements should return to `draft`. Passing tests or agent review must never supply human acceptance. An old `ready` label must not be assumed to mean approved, and a pre-existing completed record must not be retroactively assigned human acceptance. These scenarios have not yet been run.
 
+For the approval clarification in 0.4.1, compare a fully specified format conversion with a broad request for a management page whose actions and persistence behavior are unspecified. The conversion should proceed without repeat permission when no material decisions are missing. For the page, the agent should research and present its proposed product decisions for approval before dependent implementation. A detailed, already agreed page brief should remain directly implementable regardless of size; ordinary technical choices should stay autonomous. These focused scenarios have not yet been run.
+
 ## Brief reflection after a change
 
 During this evaluation, ask the agent:

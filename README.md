@@ -2,7 +2,7 @@
 
 Ultra lightweight SDD framework. The minimum documentation needed to implement correctly, verify the result, and let another agent continue the work.
 
-Current version: **0.4.0**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
+Current version: **0.4.1**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
 
 ## Get started
 
@@ -55,7 +55,7 @@ codex plugin add nano-spec@nano-spec
 
 Start a new task after updating so it loads the new skill instructions.
 
-There is no `init` skill in 0.4.0. Begin with a real task; records are created only when needed.
+There is no `init` skill in 0.4.1. Begin with a real task; records are created only when needed.
 
 The folders in `skills/` are the package sources. Each skill is self-contained. To try a skill directly without installing the plugin, give the agent its path:
 
