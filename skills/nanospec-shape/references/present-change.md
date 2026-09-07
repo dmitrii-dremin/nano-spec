@@ -1,6 +1,6 @@
 # Present a change
 
-Use this reference when presenting a prepared change for approval required by the user or project. Show the current record and briefly state the decision needed. Preserve existing authorization; presenting a record does not introduce an additional approval gate or count as approval.
+Use this reference when presenting a new or revised `draft` for human approval. Show the current record and briefly state the decision needed; for a revised brief, explain what changed. An unchanged approved brief needs no repeat approval. Any edit to the approved brief requires renewed approval; status, progress, and evidence-only updates do not. Presentation does not itself count as approval.
 
 ## Codex Desktop
 

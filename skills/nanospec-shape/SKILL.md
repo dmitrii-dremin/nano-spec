@@ -19,7 +19,13 @@ If an unknown changes behavior, compatibility, data, or scope, ask a specific qu
 
 Keep the brief where it is already maintained. If durable context is needed and no location exists, create one record at `nanospec/changes/<name>.md` in the target project. A response is enough for a small, unambiguous task in the current session; before a handoff, preserve context unavailable to the next implementer. Do not duplicate a complete issue or create empty directories.
 
+New file-based changes start with YAML frontmatter `status: draft`; preserve other existing metadata without requiring `slug` or `depends_on`. Use `approved` only after a human approves the current brief. A sufficient brief is still `draft` until approved. For a brief kept in an issue or conversation, express the same state there without duplicating it. Status tokens remain English in any documentation language.
+
+Any edit to an approved brief, including wording-only edits, resets it to `draft` and requires renewed human approval before dependent implementation. This also applies to brief revisions during implementation or acceptance. Preserve work already performed and explain what changed. Status, progress, and verification updates alone do not reset approval; they must not conceal changes to agreed behavior, constraints, criteria, or approach. A human edit alone is not approval, and earlier authorization does not approve later revisions. Do not rewrite a finished historical change when preparing a new one.
+
 Choose structure to suit the content. Outcome and reason, behavior/constraints, and verification usually suffice. Add a technical decision with rationale only for a material choice; add a plan for dependencies or continuation. Do not require separate proposal, design, and tasks files, a fixed scenario count, or headings for their own sake.
+
+If an execution list is useful, keep it in the change record with `[ ]` for not started, `[-]` for started but unfinished, and `[x]` for completed. New steps start unchecked; when refining an existing record, preserve actual progress. These markers track implementation steps, not approval or human acceptance of the change.
 
 Keep intent and costly discoveries in the change record. Do not create a separate specification library, reconstruct historical changes, or require a documentation index. Record non-obvious findings with their reason or evidence when rediscovering them would be costly; skip code summaries and easily repeated searches. Mark planned behavior as intent and resolve conflicts with existing project requirements using the user's decisions and project rules.
 
@@ -27,4 +33,4 @@ When research identifies earlier changes whose behavior this task modifies, refe
 
 When presenting a prepared change for required approval, read and follow [Present a change](references/present-change.md). Load that reference only when needed.
 
-Finish briefly: where the brief lives, whether it is sufficient for implementation, and any remaining material question. Do not request permission again for already authorized work; preserve required project approvals. A preparation-only request ends with preparation.
+Finish briefly: where the brief lives, its status, whether the contents are sufficient, and any remaining material question. Present a new or revised `draft` for human approval; do not present it as authorized merely because it is well specified. Preserve explicit approval of an unchanged brief, including a request to implement that same brief, without asking again. A preparation-only request ends with preparation, and approving the brief does not constitute acceptance of the future implementation.

@@ -2,7 +2,7 @@
 
 Ultra lightweight SDD framework. The minimum documentation needed to implement correctly, verify the result, and let another agent continue the work.
 
-Current version: **0.2.0**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
+Current version: **0.3.0**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
 
 ## Get started
 
@@ -11,15 +11,17 @@ Read the [philosophy](PHILOSOPHY.md), then choose the skill you need:
 | Skill | When to use it | Result |
 | --- | --- | --- |
 | [nanospec-explore](skills/nanospec-explore/SKILL.md) | Understand existing behavior and its history | A supported account of current behavior, historical intent, and material unknowns |
-| [nanospec-shape](skills/nanospec-shape/SKILL.md) | Clarify and prepare a task | A sufficient task brief or a specific unresolved question |
-| [nanospec-apply](skills/nanospec-apply/SKILL.md) | Implement or resume authorized work | Implementation, verification, and necessary record updates |
+| [nanospec-shape](skills/nanospec-shape/SKILL.md) | Clarify and prepare a task | A draft for human approval or a specific unresolved question |
+| [nanospec-apply](skills/nanospec-apply/SKILL.md) | Implement or resume an approved task | Verified implementation awaiting human acceptance; closure after acceptance |
 | [nanospec-check](skills/nanospec-check/SKILL.md) | Independently assess a brief or its implementation | Material gaps or a supported conclusion with verification limits |
 
 These are independent actions. Calling every skill is unnecessary: `explore` answers research questions, `apply` includes research and verification needed for its own work, and `check` supports a separate review.
 
 In Codex, when the task-title tool is available, Explore and Shape rename the current task to `explore <summary>` and `shape <summary>`; Apply uses `applying <change_name>`. When a prepared change requires approval, Shape follows its presentation reference to open the record in Codex Desktop or provide a link in other environments. These conveniences do not add an approval gate or prevent work when host tools are unavailable.
 
-The change record is the only core artifact: user intent, acceptance criteria, and evidence of completion. NanoSpec has no maintained specification library or mandatory documentation index. A completed change records what was verified at completion; later work can change that behavior. Keep additional notes only when they save costly research.
+The change record is the only core artifact: user intent, acceptance criteria, status, and evidence of completion. File-based changes use one YAML `status`: `draft`, `approved`, `in_progress`, `ready_for_acceptance`, `done`, or `canceled`. Any edit to an approved brief returns it to `draft` for renewed human approval; progress and evidence-only updates do not. Agent verification reaches `ready_for_acceptance`; human acceptance is required for `done`. See the [status rules](PHILOSOPHY.md#change-status).
+
+NanoSpec has no maintained specification library or mandatory documentation index. A completed change records what was verified and accepted at that point; later work can change that behavior. Keep additional notes only when they save costly research.
 
 Record known relationships to earlier changes inside the newer change, explaining the specific behavior modified. Explore uses targeted searches, these references, and current implementation evidence to answer a question without reading the entire history. No separate relationship registry or mandatory exploration report is needed.
 
@@ -28,15 +30,32 @@ Record known relationships to earlier changes inside the newer change, explainin
 With Codex CLI available, register the versioned repository marketplace and install the plugin:
 
 ```sh
-codex plugin marketplace add dmitrii-dremin/nano-spec --ref v0.2.0
+codex plugin marketplace add dmitrii-dremin/nano-spec --ref v0.3.0
 codex plugin add nano-spec@nano-spec
 ```
 
 Then start a new task in your project. Restart Codex Desktop if the plugin is not visible. Select the installed NanoSpec skill in the skill picker, or ask the agent to use `nanospec-shape`, `nanospec-apply`, `nanospec-explore`, or `nanospec-check` explicitly. The host may display the plugin namespace alongside the skill name.
 
-The marketplace and its plugin source both pin `v0.2.0`; installation does not follow the development branch. These commands are supported by the locally checked Codex CLI 0.153.4. See the [Codex plugin documentation](https://developers.openai.com/plugins/build/plugins) for marketplace management. Installation and live skill behavior should be confirmed in the first run; schema validation alone does not prove either.
+The marketplace and its plugin source both pin `v0.3.0`; installation does not follow the development branch. These commands are supported by the locally checked Codex CLI 0.153.4. See the [Codex plugin documentation](https://developers.openai.com/plugins/build/plugins) for marketplace management. Installation and live skill behavior should be confirmed in the first run; schema validation alone does not prove either.
 
-There is no `nanospec-init` skill in 0.2.0. Begin with a real task; records are created only when needed.
+To update a Git marketplace that tracks the repository's default branch, refresh its catalog and reinstall the plugin:
+
+```sh
+codex plugin marketplace upgrade nano-spec
+codex plugin add nano-spec@nano-spec
+```
+
+If the marketplace was pinned to an older tag with `--ref`, refreshing preserves that pin. To switch it to this release, re-register the marketplace, then reinstall:
+
+```sh
+codex plugin marketplace remove nano-spec
+codex plugin marketplace add dmitrii-dremin/nano-spec --ref v0.3.0
+codex plugin add nano-spec@nano-spec
+```
+
+Start a new task after updating so it loads the new skill instructions.
+
+There is no `nanospec-init` skill in 0.3.0. Begin with a real task; records are created only when needed.
 
 The folders in `skills/` are the package sources. Each skill is self-contained. To try a skill directly without installing the plugin, give the agent its path:
 
@@ -56,7 +75,7 @@ Next: [practical evaluation](TESTING.md).
 
 Agent Plugins is the selected package format for NanoSpec. Keep the portable skills in `skills/` as the canonical source so packaging does not create separate workflow implementations for different agents. This choice provides a plugin installation path while preserving direct use of individual skills.
 
-The root `plugin.json` declares the portable Agent Plugins package. `.codex-plugin/plugin.json` provides Codex compatibility metadata and points at the same skills. `.agents/plugins/marketplace.json` exposes the versioned Git source to Codex. Keep both manifest versions aligned with `VERSION` and the marketplace source aligned with the release tag. Project initialization behavior is still being designed.
+The root `plugin.json` declares the portable Agent Plugins package. `.codex-plugin/plugin.json` provides Codex compatibility metadata and points at the same skills. `.agents/plugins/marketplace.json` exposes the published Git source to Codex. Keep both manifest versions aligned with `VERSION`; the marketplace remains pinned to the published release during development and must be updated with the next release tag when publishing. Project initialization behavior is still being designed.
 
 ## Language
 

@@ -18,15 +18,23 @@ NanoSpec's own documentation and skill sources use English. In a target project,
 
 ## Documents appear when needed
 
-The change record is NanoSpec's only core artifact. It holds user intent, acceptance criteria, and evidence of completion. If an accessible issue or another durable source already describes the task completely, use it. A user message can be enough for a small, unambiguous task within one session. Do not rewrite a brief just to satisfy a format.
+The change record is NanoSpec's only core artifact. It holds user intent, acceptance criteria, status, and evidence of completion. If an accessible issue or another durable source already describes the task completely, use it. A user message can be enough for a small, unambiguous task within one session. Do not rewrite a brief just to satisfy a format.
 
 Before a handoff, preserve information the next implementer would otherwise lose. If no suitable location exists, use `nanospec/changes/<name>.md`. Create the directory only with its first useful record; continue the existing record for the same task.
 
 Add a technical decision and its rationale when it shapes the approach or avoids repeated investigation. A plan helps with dependencies, long tasks, or handoffs. Separate files are justified by independent use or volume; there is no mandatory proposal/design/tasks bundle.
 
+When work needs a plan or may span sessions, keep a short execution list in the same change record: `[ ]` means not started, `[-]` means started but unfinished, and `[x]` means completed. Maintaining these markers is mandatory whenever the list exists: save `[-]` before the first action on a step; save `[x]` immediately after completing it and its required checks, before starting another step. Do not defer transitions to the end of the session or keep them only in chat or a host's plan UI. If a completed step needs further work, save `[-]` before resuming it. An interrupted or blocked step stays `[-]`; this marker does not imply an agent is still running. Completed steps do not replace human acceptance of the whole change. These are literal text markers, independent of how a Markdown renderer displays them.
+
+Keep a concise resume note beside the list when the unfinished step needs context: where work stopped, relevant files, checks already run, and the next action or blocker. Update it after each meaningful intermediate result or costly discovery, before switching away from unfinished work, and before a planned handoff; replace stale notes instead of accumulating a diary. A new session starts from unfinished steps and reconciles the record with the actual code, diff, and relevant checks, correcting stale markers and notes before continuing. An abrupt interruption may leave unrecorded work; the list guides recovery rather than proving the exact state. Progress-only updates do not invalidate approval.
+
 An example brief for a small task:
 
 ```md
+---
+status: draft
+---
+
 # Cancel an export
 
 Why: let the user stop a long export.
@@ -42,6 +50,25 @@ successful completion; check that writing stops and files are handled correctly.
 
 This example is not a mandatory template. Resolve material ambiguity in the specific project before dependent implementation.
 
+## Change status
+
+For a file-based change, keep one `status` field in YAML frontmatter and preserve unrelated existing metadata. No `slug`, dependency array, approval ledger, or separate status file is required. For an issue or conversation-based brief, express the same state in its existing location without creating a duplicate record. Status values are fixed English tokens; the surrounding content follows the project's language.
+
+| Status | Meaning |
+| --- | --- |
+| `draft` | The brief is being prepared or revised and its current contents have not been approved by a human. |
+| `approved` | A human approved the current brief; implementation has not started or is awaiting resumption after renewed approval. |
+| `in_progress` | Implementation or agent verification is underway. A blocked task stays here with a short explanation. |
+| `ready_for_acceptance` | Implementation and required agent checks are complete; human acceptance of this result is pending. |
+| `done` | A human accepted the verified result against the current approved brief. |
+| `canceled` | The change was abandoned or replaced without being completed; record the reason or replacement when useful. |
+
+Any edit to the approved brief invalidates its approval: return to `draft`, show what changed, and obtain renewed human approval before implementing the revised brief. This applies even to wording-only edits and also when implementation has already started or is awaiting acceptance. Updating status, progress, or verification evidence alone does not revise the brief; changing agreed behavior, constraints, acceptance criteria, or approach does. Keep existing implementation work when approval is invalidated, but do not continue dependent work under stale approval.
+
+Use the human's explicit decision about the current brief to enter `approved`; an earlier decision still applies only while that brief is unchanged. An explicit request to implement that same brief can supply approval. Editing the brief is not itself approval. A generic earlier authorization does not approve subsequent revisions. Do not require a separate command or file write for every intermediate transition.
+
+After agent verification, enter `ready_for_acceptance`, present the result and evidence, and request human acceptance. Passing tests, a favorable agent review, or silence cannot set `done`. If the human requests implementation fixes under the same brief, return to `in_progress`, then repeat verification and acceptance. If the brief changes, return to `draft` instead. A canceled change is not evidence of completed functionality. Preserve old completed records as history; later changes do not trigger retrospective reapproval.
+
 ## Context and memory
 
 Start with the current brief and applicable project instructions. Find relevant existing documentation, code, tests, and past changes through affected behavior, modules, and links; expand reading along discovered dependencies. Keeping context small does not justify missing an important constraint. Do not load the entire change history by default.
@@ -54,12 +81,12 @@ Do not require a complete lineage, allocate IDs through a new registry, maintain
 
 Keep costly discoveries in the change that needed them: externally imposed constraints, reasons for surprising decisions, or environment facts that code does not reveal. Include the reason or evidence and enough scope to judge relevance. A separate shared note is justified only when reuse has concrete value and the information is difficult to recover; use a suitable existing location. There is no required knowledge file or documentation index. A directory listing, code summary, or easily repeated search does not justify another maintained document.
 
-For unfinished work, retain only what helps continuation: what is done, what was verified, what remains, and the blocking question. Close a change as completed only after its acceptance criteria have been met and verified; record a short outcome and evidence, including the checked revision or equivalent artifact identity when available. Distinguish completion from cancellation or supersession. Completion is evidence of the accepted behavior at that point, not a perpetual guarantee about the latest code. Completed records need no ongoing synchronization or separate archiving ceremony.
+For unfinished work, retain only what helps continuation: what is done, what was verified, what remains, and the blocking question. At `ready_for_acceptance`, record a short outcome and evidence, including the checked revision or equivalent artifact identity when available. At `done`, retain a brief note of the human's acceptance of that result. Completion is evidence of accepted behavior at that point, not a perpetual guarantee about the latest code. Completed records need no ongoing synchronization or separate archiving ceremony.
 
 ## Execution and completion
 
-Preparing a brief does not authorize implementation. When implementation is already authorized and the brief is sufficient, no extra approval ritual is needed. Preserve the target project's required approvals.
+Preparing a brief does not authorize implementation. Human approval of the current brief authorizes work within that scope, subject to the target project's permissions. A revised brief requires renewed approval, and the implemented result requires separate human acceptance. Preserve any additional project-required approvals.
 
-A change is complete when the result meets its acceptance criteria and appropriate checks have been performed, including any project-required deliverables. Do not rewrite requirements to fit the code. If verification is unavailable, state exactly what remains unconfirmed and do not mark the change completed; a status label without evidence does not prove readiness.
+A change is `done` when its acceptance criteria are met, appropriate checks and project-required deliverables are complete, and a human has accepted that result. Do not rewrite requirements to fit the code. If required verification is unavailable, state exactly what remains unconfirmed and keep `in_progress`; a status label without evidence does not prove readiness.
 
 Evaluate the framework by result correctness, material guesses and rework, handoff success, and context cost. Add a rule in response to an observed, recurring failure when a simpler clarification cannot solve it.

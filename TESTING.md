@@ -6,9 +6,11 @@ Start with useful changes in the user's project. The first goal is to discover w
 
 Install a fixed NanoSpec release and start a fresh task in the target project. Choose a small feature or bug with an observable outcome. No initialization skill is required.
 
-Use Shape when the brief needs preparation; ask for approval explicitly if you want to review it before implementation. Check that Codex gives the task a short `shape ...` title and opens a local change record when presenting it for required approval. Then use Apply: the title should become `applying <change_name>`, and completion should include acceptance evidence. Use Explore for a real research question and Check when a separate review is useful; invoking all skills is not required.
+For the status workflow introduced after 0.2.0, use Shape when the brief needs preparation. Check that Codex gives the task a short `shape ...` title and presents the `draft` for human approval. Approve the current brief, then use Apply: the title should become `applying <change_name>`, implementation should use `in_progress`, and verified work should stop at `ready_for_acceptance` with evidence. Only human acceptance should set `done`. Use Explore for a real research question and Check when a separate review is useful; invoking all skills is not required. The 0.2.0 package predates these status rules; use 0.3.0 or later to test this workflow.
 
 Check the resulting behavior yourself. Record useful feedback in the conversation or the existing change; do not create a separate report for each run.
+
+When testing the new statuses, revise an approved brief, including a wording-only change: it should return to `draft` and await renewed human approval. Updating status or test evidence alone should preserve approval. Request implementation fixes at acceptance: unchanged requirements should return to `in_progress`, while revised requirements should return to `draft`. Passing tests or agent review must never supply human acceptance. An old `ready` label must not be assumed to mean approved, and a pre-existing completed record must not be retroactively assigned human acceptance. These scenarios have not yet been run.
 
 ## Brief reflection after a change
 
@@ -33,7 +35,7 @@ Keep the first two or three changes on the same NanoSpec version unless a clear 
 - History research answers a concrete question. When a later change modifies part of an earlier one, its local reference explains what changed without rewriting the older record.
 - Explore distinguishes current code from historical evidence and unimplemented proposals, including when links are missing or a change was reverted.
 - Language follows the user and project. Missing host UI tools fall back gracefully; displaying a record is not approval.
-- A fresh task can continue substantive work from the record without the original conversation.
+- A fresh task can continue substantive work from the record without the original conversation. On a real change with an execution list, confirm that `[-]` is saved before the first action, `[x]` immediately after completion and required checks before another step starts, and resume notes during substantive progress rather than only at session end. Interrupt work during a `[-]` step and resume in a fresh task with the same working files: it should inspect partial work and the resume note, recover any progress since the last note, correct stale markers, and continue without restarting completed work. `[ ]` steps should mean not started; reopening a completed step should save `[-]` first. This interruption scenario has not yet been run.
 
 ## Focused comparisons only when needed
 

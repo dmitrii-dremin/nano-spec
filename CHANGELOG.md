@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0 — 2026-09-07
+
+- **Breaking:** define one change `status` with six values: `draft`, `approved`, `in_progress`, `ready_for_acceptance`, `done`, and `canceled`.
+- Any edit to an approved brief, including wording-only edits, invalidates approval and returns it to `draft`. Status, progress, and evidence-only updates preserve approval when the brief remains unchanged.
+- Keep useful execution plans in the change with three step markers: `[ ]` not started, `[-]` started but unfinished, and `[x]` completed. Save concise resume context during work and reconcile interrupted steps with actual implementation in a new session.
+- Require human approval of the current brief before implementation and human acceptance of the verified result before `done`. Agent verification ends at `ready_for_acceptance`; acceptance fixes return to implementation, and brief revisions require renewed approval.
+- Update all four skills and the evaluation plan. Pin the marketplace to v0.3.0; existing installations require an explicit update.
+- Migration: do not bulk-convert legacy `ready` or completed records. For active work, establish actual approval and verification before assigning a new status; preserve unrelated metadata and historical evidence without inventing human acceptance.
+
 ## 0.2.0 — 2026-09-07
 
 - Package the canonical skills as Agent Plugins, with Codex compatibility metadata and a Git marketplace pinned to the release tag. Add installation instructions; live installation and cross-agent behavior still need verification.
