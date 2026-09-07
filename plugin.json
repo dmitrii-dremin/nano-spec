@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "nano-spec",
+  "version": "0.2.0",
+  "description": "Minimal change-driven development: preserve intent, verify outcomes, and research only what matters.",
+  "author": {
+    "name": "dmitrii-dremin",
+    "url": "https://github.com/dmitrii-dremin"
+  },
+  "repository": "https://github.com/dmitrii-dremin/nano-spec",
+  "homepage": "https://github.com/dmitrii-dremin/nano-spec"
+}

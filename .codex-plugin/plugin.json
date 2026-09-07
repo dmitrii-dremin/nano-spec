@@ -1,0 +1,28 @@
+{
+  "name": "nano-spec",
+  "version": "0.2.0",
+  "description": "Minimal change-driven development: preserve intent, verify outcomes, and research only what matters.",
+  "author": {
+    "name": "dmitrii-dremin",
+    "url": "https://github.com/dmitrii-dremin"
+  },
+  "repository": "https://github.com/dmitrii-dremin/nano-spec",
+  "homepage": "https://github.com/dmitrii-dremin/nano-spec",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "NanoSpec",
+    "shortDescription": "Minimal change records for useful agent workflows.",
+    "longDescription": "Explore, shape, implement, and check changes without a maintained specification library or mandatory ceremonies.",
+    "developerName": "dmitrii-dremin",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Explore how this feature works.",
+      "Prepare a concise change for this task.",
+      "Implement this change and verify its acceptance criteria."
+    ]
+  }
+}

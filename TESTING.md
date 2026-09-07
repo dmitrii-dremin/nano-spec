@@ -1,25 +1,42 @@
-# Практическая проверка 0.1.0
+# Try NanoSpec on real work
 
-Это план следующего этапа, не обязательный процесс для каждой задачи. Поведенческие прогоны пока не выполнены.
+Start with useful changes in the user's project. The first goal is to discover whether NanoSpec helps deliver them, not to build a benchmark suite. Behavioral evaluation is pending.
 
-Возьми три реальные задачи с независимо определимым правильным результатом:
+## First run
 
-| Задача | Что проверяем |
-| --- | --- |
-| Небольшой однозначный баг | Агент выполняет работу по достаточной постановке без создания лишних документов |
-| Новое поведение с крайними случаями | Короткая запись сохраняет нужные условия и позволяет проверить результат |
-| Изменение с архитектурным выбором | Сохраняются причина выбора и ограничения, следующий агент может продолжить работу |
+Install a fixed NanoSpec release and start a fresh task in the target project. Choose a small feature or bug with an observable outcome. No initialization skill is required.
 
-Для сравнения выполни каждую задачу из одного исходного состояния с обычной постановкой и с NanoSpec. По возможности добавь OpenSpec как третью конфигурацию. Используй отдельные рабочие копии и одинаковые модель, настройки, инструменты и разрешения. Не передавай следующему исполнителю выводы предыдущего прогона.
+Use Shape when the brief needs preparation; ask for approval explicitly if you want to review it before implementation. Check that Codex gives the task a short `shape ...` title and opens a local change record when presenting it for required approval. Then use Apply: the title should become `applying <change_name>`, and completion should include acceptance evidence. Use Explore for a real research question and Check when a separate review is useful; invoking all skills is not required.
 
-Для проверки передачи останови одну из содержательных задач на естественной границе и продолжи в новой сессии, имеющей только репозиторий, скилл, путь к постановке и исходные условия задачи. Отметь, какие решения пришлось повторно выяснять.
+Check the resulting behavior yourself. Record useful feedback in the conversation or the existing change; do not create a separate report for each run.
 
-В одном отчёте сохрани исходную ревизию, постановку, модель/настройки и результаты каждой конфигурации:
+## Brief reflection after a change
 
-- Правильность по независимо заданным критериям, пропущенные ограничения и переделки.
-- Число существенных уточнений и необоснованных предположений.
-- Прочитанный и созданный контекст: токены при наличии измерения, иначе объём текста с пометкой «приближение».
-- Время на документы и реализацию, если его можно надёжно измерить.
-- Удалось ли продолжить работу без исходного разговора и чего не хватило.
+During this evaluation, ask the agent:
 
-Меньший объём не считается успехом, если потеряно существенное требование. Один прогон даёт наблюдение, а не доказательство превосходства. Меняй философию и скиллы по конкретным провалам; повторяй затронутый сценарий после исправления. Перед реальными прогонами достаточно проверить структуру скиллов и доступность ссылок.
+```text
+Reflect briefly on this change, using concrete actions and artifacts as evidence:
+- What did NanoSpec help clarify or prevent?
+- What reading, writing, or interaction was unnecessary?
+- What information was missing or expensive to rediscover?
+Propose at most one improvement, or say that no change is warranted.
+Do not edit NanoSpec or produce an additional report.
+```
+
+Add the user's experience: did the result meet expectations, and which interaction felt useful or irritating? Agent reflection is a hypothesis to compare with the actual result, rework, and user feedback; it is not an objective score.
+
+Keep the first two or three changes on the same NanoSpec version unless a clear blocker needs fixing. Note the release and any material model or environment differences. Correct demonstrated problems with small changes; do not turn each suggestion into a new universal rule.
+
+## What to watch during normal development
+
+- Briefs and verification preserve important requirements without generating a specification library, index, or activity diary.
+- History research answers a concrete question. When a later change modifies part of an earlier one, its local reference explains what changed without rewriting the older record.
+- Explore distinguishes current code from historical evidence and unimplemented proposals, including when links are missing or a change was reverted.
+- Language follows the user and project. Missing host UI tools fall back gracefully; displaying a record is not approval.
+- A fresh task can continue substantive work from the record without the original conversation.
+
+## Focused comparisons only when needed
+
+If an observed problem is recurring or its cause is uncertain, replay that small scenario with and without the relevant instruction, from the same starting state and with comparable settings. Use isolated working copies and do not leak the previous solution into the next run. Compare correctness, rework, context cost, and user intervention. A single run is evidence to investigate, not proof of superiority.
+
+Maintain a benchmark only when it protects against a demonstrated regression and is cheaper than rediscovering it through normal work.

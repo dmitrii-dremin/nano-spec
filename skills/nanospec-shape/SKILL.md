@@ -1,22 +1,30 @@
 ---
 name: nanospec-shape
-description: Подготовить или уточнить постановку изменения по NanoSpec перед реализацией. Используй для оформления задачи, определения поведения, ограничений и проверки; сам запрос на подготовку не разрешает реализацию.
+description: Prepare or clarify a NanoSpec task brief before implementation, defining behavior, constraints, and verification. A request to prepare a brief alone does not authorize implementation.
 ---
 
 # NanoSpec Shape
 
-Подготовь минимум информации, достаточный для правильного выполнения задачи. Каждый фрагмент должен предотвращать ошибку, сохранять существенное решение или помогать проверить результат.
+Prepare the minimum information needed to complete the task correctly. Each piece should prevent a mistake, preserve a material decision, or help verify the result.
 
-Прочитай запрос, применимые инструкции проекта и существующую постановку. Найди связанные контракты, код и тесты по затронутому поведению; следуй существенным зависимостям, не загружая весь архив проекта.
+Use the user's requested language for communication and follow the target project's conventions for documentation, unless the user directs otherwise. Accept briefs in any natural language; English headings or keywords are not required. Preserve identifiers, paths, commands, and exact interface text unless changing them is part of the task. Do not create translations solely to use this skill.
 
-Выясни нужный результат и причину, наблюдаемое поведение, существенные ограничения и способ проверки. Примеры нужны там, где они устраняют неоднозначность. Ссылки на точные существующие источники предпочтительнее пересказа. Укажи конкретные границы, если их отсутствие может расширить задачу.
+At the start of this workflow in Codex, when `mcp__codex_app__set_thread_title` is available, rename the current task to `shape <summary>` by passing `title` and omitting `threadId`. Summarize the invocation's requested change in a few words, using the user's language and the literal prefix `shape`. Use the triggering request if no explicit argument was supplied. Rename once per invocation; if the tool is unavailable or fails, continue preparation without blocking or claiming success. Do not create a new task.
 
-Если неизвестное меняет поведение, совместимость, данные или объём задачи, задай конкретный вопрос. Пока ответ не получен, продолжай независимое исследование, но не объявляй зависимую часть готовой. Обратимые детали реализации можно оставить исполнителю. Отличай предложения и предположения от требований пользователя.
+Read the request, applicable project instructions, and any existing brief. Find relevant existing documentation, code, tests, and past changes through the affected behavior; follow material dependencies without loading the whole project archive. A past completed change provides intent and evidence at completion, not a guarantee about today's implementation.
 
-Сохрани постановку там, где она уже ведётся. Если нужен устойчивый контекст и места нет, создай одну запись `nanospec/changes/<name>.md` в целевом проекте. Для маленькой однозначной задачи в текущей сессии достаточно ответа; перед передачей сохрани контекст, недоступный следующему исполнителю. Не создавай копию полноценного issue или пустые каталоги.
+Establish the intended outcome and reason, observable acceptance criteria, material constraints, and verification method. Use examples where they resolve ambiguity. Prefer references to precise existing sources over retelling them. State concrete boundaries when their absence could expand the task.
 
-Выбирай структуру по содержанию. Обычно хватает результата с причиной, поведения/ограничений и проверки. Добавляй техническое решение с причиной только при существенном выборе; план — при зависимостях или необходимости продолжения. Не требуй отдельные proposal, design и tasks, фиксированное число сценариев или заголовки ради формата.
+If an unknown changes behavior, compatibility, data, or scope, ask a specific question. Continue independent investigation while waiting, but do not call the dependent part ready. Leave reversible implementation details to the implementer. Distinguish proposals and assumptions from the user's requirements.
 
-Сравни постановку с текущими контрактами. Планируемое изменение пометь как намерение; не выдавай его за уже действующее поведение. Конфликт разреши по решению пользователя и правилам проекта, не молчаливой перезаписью.
+Keep the brief where it is already maintained. If durable context is needed and no location exists, create one record at `nanospec/changes/<name>.md` in the target project. A response is enough for a small, unambiguous task in the current session; before a handoff, preserve context unavailable to the next implementer. Do not duplicate a complete issue or create empty directories.
 
-Заверши коротко: где находится постановка, достаточна ли она для реализации и какой существенный вопрос остался, если он есть. Не запрашивай повторное разрешение на уже разрешённую работу; сохраняй обязательные согласования проекта. Запрос только на подготовку заканчивается подготовкой.
+Choose structure to suit the content. Outcome and reason, behavior/constraints, and verification usually suffice. Add a technical decision with rationale only for a material choice; add a plan for dependencies or continuation. Do not require separate proposal, design, and tasks files, a fixed scenario count, or headings for their own sake.
+
+Keep intent and costly discoveries in the change record. Do not create a separate specification library, reconstruct historical changes, or require a documentation index. Record non-obvious findings with their reason or evidence when rediscovering them would be costly; skip code summaries and easily repeated searches. Mark planned behavior as intent and resolve conflicts with existing project requirements using the user's decisions and project rules.
+
+When research identifies earlier changes whose behavior this task modifies, reference them in this change using an existing filename, identifier, or issue URL. Explain the exact behavior affected and preserve the scope of a partial modification. The relationship is planned until verified. Do not require exhaustive historical research, a separate relationship registry, new numbering, or edits to earlier records.
+
+When presenting a prepared change for required approval, read and follow [Present a change](references/present-change.md). Load that reference only when needed.
+
+Finish briefly: where the brief lives, whether it is sufficient for implementation, and any remaining material question. Do not request permission again for already authorized work; preserve required project approvals. A preparation-only request ends with preparation.

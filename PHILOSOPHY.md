@@ -1,59 +1,65 @@
-# Философия NanoSpec
+# NanoSpec philosophy
 
-NanoSpec помогает агенту получить достаточно контекста, чтобы выполнить задачу правильно и оставить работу понятной следующему исполнителю.
+NanoSpec helps an agent obtain enough context to complete a task correctly and leave the work understandable to the next implementer.
 
-**Каждый фрагмент документации должен предотвращать конкретную ошибку, сохранять существенное решение или помогать проверить результат.**
+**Minimum clutter and unnecessary rituals; maximum useful information. Every piece of documentation should prevent a concrete mistake, preserve a material decision, or help verify the result.**
 
-## Достаточная постановка
+## A sufficient brief
 
-Постановка достаточна, когда из неё и доступных ссылок понятны нужный результат и его причина, проверяемое поведение, существенные ограничения и способ проверки. В ней нет нерешённых вопросов, от которых зависит правильность текущего шага.
+A brief is sufficient when it and its accessible references explain the intended outcome and reason, verifiable behavior, material constraints, and a way to verify completion. No unresolved question should determine whether the current step is correct.
 
-Это требования к содержанию, а не обязательные заголовки. Нет минимального числа строк, сценариев, документов или этапов. Короткое условие с точным примером может заменить страницу описания. Сложной миграции может понадобиться больше текста.
+These are content requirements, not mandatory headings. There is no minimum number of lines, scenarios, documents, or stages. A short condition with a precise example can replace a page of description. A complex migration may need more detail.
 
-Фиксируй то, что нельзя надёжно восстановить из кода: намерение, обязательства продукта, ограничения, причины неочевидных решений. На существующие интерфейсы и тесты ссылайся. Код показывает текущее устройство, но сам по себе не доказывает, что оно соответствует намерению пользователя.
+Record what cannot reliably be recovered from code: intent, product commitments, constraints, and the reasons behind non-obvious decisions. Reference existing interfaces and tests. Code shows the current implementation; it does not by itself prove that it matches the user's intent.
 
-Уточняй неизвестное, если ответ меняет поведение, совместимость, данные или границы задачи. Локальные обратимые технические решения агент принимает самостоятельно. Предположение должно быть различимо с согласованным требованием; опасное предположение не становится допустимым оттого, что его записали.
+Clarify an unknown when its answer changes behavior, compatibility, data, or scope. Agents can make local, reversible technical decisions independently. Distinguish assumptions from agreed requirements; writing down a risky assumption does not make it acceptable.
 
-## Документы появляются по необходимости
+NanoSpec's own documentation and skill sources use English. In a target project, follow the user's requested language and established documentation conventions. Briefs, headings, and explanations can use any natural language; English keywords are not required. Preserve identifiers and exact interface text unless the task calls for changing them. Do not create translated copies just to use NanoSpec.
 
-На изменение по умолчанию достаточно одной рабочей записи. Если задача уже полностью описана в доступном issue или другом устойчивом источнике, используй его. Для маленькой однозначной задачи в одной сессии достаточно сообщения пользователя. Не переписывай постановку ради соблюдения формата.
+## Documents appear when needed
 
-Перед передачей работы сохрани сведения, которые следующий исполнитель иначе потеряет. Если подходящего места нет, используй `nanospec/changes/<name>.md`. Создавай каталог только вместе с первой нужной записью; продолжай существующую запись той же задачи.
+The change record is NanoSpec's only core artifact. It holds user intent, acceptance criteria, and evidence of completion. If an accessible issue or another durable source already describes the task completely, use it. A user message can be enough for a small, unambiguous task within one session. Do not rewrite a brief just to satisfy a format.
 
-Техническое решение с обоснованием добавляется, когда оно влияет на подход или помогает избежать повторного исследования. План нужен, когда есть зависимости, длительная работа или передача. Отдельные файлы оправданы независимым использованием или объёмом; обязательного набора proposal/design/tasks нет.
+Before a handoff, preserve information the next implementer would otherwise lose. If no suitable location exists, use `nanospec/changes/<name>.md`. Create the directory only with its first useful record; continue the existing record for the same task.
 
-Пример достаточной записи для небольшой задачи:
+Add a technical decision and its rationale when it shapes the approach or avoids repeated investigation. A plan helps with dependencies, long tasks, or handoffs. Separate files are justified by independent use or volume; there is no mandatory proposal/design/tasks bundle.
+
+An example brief for a small task:
 
 ```md
-# Отмена экспорта
+# Cancel an export
 
-Зачем: пользователь может остановить долгий экспорт.
+Why: let the user stop a long export.
 
-Поведение:
-- Отмена останавливает создание новых строк и закрывает выходной поток.
-- Незавершённый временный файл удаляется; готовый экспорт не удаляется.
-- Повторная отмена безопасна.
+Behavior:
+- Cancellation stops producing new rows and closes the output stream.
+- Delete the incomplete temporary file; preserve a completed export.
+- Repeated cancellation is safe.
 
-Проверка: отмена в процессе записи, повторная отмена и отмена после
-успешного завершения; проверить остановку записи и состояние файлов.
+Verification: cancel during writing, cancel repeatedly, and cancel after
+successful completion; check that writing stops and files are handled correctly.
 ```
 
-Пример не задаёт обязательный шаблон. Существенную неоднозначность конкретного проекта нужно разрешить до зависимой реализации.
+This example is not a mandatory template. Resolve material ambiguity in the specific project before dependent implementation.
 
-## Контекст и память
+## Context and memory
 
-Начальный контекст — текущая постановка, применимые инструкции проекта и относящиеся к задаче обязательства. Ищи связанные документы по затронутому поведению, модулям и ссылкам; расширяй чтение по найденным зависимостям. Малый контекст не оправдывает пропуск важного ограничения. Полная история изменений не загружается по умолчанию.
+Start with the current brief and applicable project instructions. Find relevant existing documentation, code, tests, and past changes through affected behavior, modules, and links; expand reading along discovered dependencies. Keeping context small does not justify missing an important constraint. Do not load the entire change history by default.
 
-Рабочая запись описывает намерение и ход конкретного изменения. Долгосрочный контракт описывает действующее поведение. Сохраняй в существующей документации проекта обязательства и причины решений, которые понадобятся будущей работе. Если подходящего места нет, можно использовать `nanospec/specs/<topic>.md`; создавать его для каждой задачи не требуется.
+NanoSpec does not maintain a separate specification library or synchronize completed changes into a description of the current product. Research current behavior from the implementation and appropriate checks. Use past changes to recover intent and earlier evidence; later work may have changed the behavior. Existing project documentation and its own maintenance requirements still apply, without creating a NanoSpec copy.
 
-Не дублируй один действующий контракт в нескольких местах. При изменении поведения обновляй относящийся к нему контракт в рамках той же работы. Отличай планируемое поведение от реализованного и проверенного; при противоречии выясни источник решения, а не выбирай удобный документ молча.
+When research identifies an earlier change whose behavior the current change modifies, record that relationship inside the newer change. Reference the existing filename, identifier, or issue URL and state exactly what behavior changes; a partial modification does not replace the entire earlier change. For example: `Changes CHANGE-7000: failed exports now retry automatically up to three times; manual retry remains available.` The relationship describes intent until implementation is verified.
 
-Для незавершённой работы сохраняй только полезное для продолжения: что сделано, что проверено, что осталось и какой вопрос мешает. После выполнения достаточно короткого результата со ссылками на подтверждения. Закрытая запись — история изменения, а не актуальная инструкция. Отдельная церемония архивирования не нужна.
+Do not require a complete lineage, allocate IDs through a new registry, maintain a separate relationship list, or add backlinks to old records. Find later changes by searching references to the earlier record, supplemented by focused searches of behavior and code. Missing relationships are not evidence that behavior is unchanged. Explore follows relevant links and reconciles historical evidence with the target implementation; it does not read all changes or produce a maintained system description.
 
-## Работа и завершение
+Keep costly discoveries in the change that needed them: externally imposed constraints, reasons for surprising decisions, or environment facts that code does not reveal. Include the reason or evidence and enough scope to judge relevance. A separate shared note is justified only when reuse has concrete value and the information is difficult to recover; use a suitable existing location. There is no required knowledge file or documentation index. A directory listing, code summary, or easily repeated search does not justify another maintained document.
 
-Подготовка постановки не означает разрешение на реализацию. Когда реализация уже разрешена и постановка достаточна, дополнительный ритуал одобрения не нужен. Обязательные согласования конкретного проекта сохраняются.
+For unfinished work, retain only what helps continuation: what is done, what was verified, what remains, and the blocking question. Close a change as completed only after its acceptance criteria have been met and verified; record a short outcome and evidence, including the checked revision or equivalent artifact identity when available. Distinguish completion from cancellation or supersession. Completion is evidence of the accepted behavior at that point, not a perpetual guarantee about the latest code. Completed records need no ongoing synchronization or separate archiving ceremony.
 
-Изменение завершено, когда результат соответствует постановке, выполнены подходящие проверки и обновлены затронутые действующие контракты. Не подгоняй требования под получившийся код. Если проверка недоступна, укажи, что именно осталось неподтверждённым; наличие чекбоксов и файлов не доказывает готовность.
+## Execution and completion
 
-Сам фреймворк оценивается по правильности результата, числу существенных догадок и переделок, возможности передачи работы и затратам на контекст. Новое правило добавляется по наблюдаемому повторяемому провалу, если более простое уточнение не решает проблему.
+Preparing a brief does not authorize implementation. When implementation is already authorized and the brief is sufficient, no extra approval ritual is needed. Preserve the target project's required approvals.
+
+A change is complete when the result meets its acceptance criteria and appropriate checks have been performed, including any project-required deliverables. Do not rewrite requirements to fit the code. If verification is unavailable, state exactly what remains unconfirmed and do not mark the change completed; a status label without evidence does not prove readiness.
+
+Evaluate the framework by result correctness, material guesses and rework, handoff success, and context cost. Add a rule in response to an observed, recurring failure when a simpler clarification cannot solve it.
