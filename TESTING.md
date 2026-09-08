@@ -20,6 +20,8 @@ For completion titles introduced after 0.4.1, verify that Apply changes `applyin
 
 For the archive workflow, close a standard file-based change and verify that exactly one record moves into `nanospec/changes/archive/` with a real UTC timestamp, `done` status, preserved evidence, and working relative/incoming navigation links. A result awaiting acceptance must stay active. Repeat close-out to check that no second prefix or duplicate appears; test an existing destination without overwriting it. Explore should find the record through its original name and distinguish closure order from implementation order. An explicitly reopened change should return to its active path; unrelated history and issue-based briefs should stay in place. These archive scenarios have not yet been run.
 
+For reconciliation before approval in 0.5.1, exercise both Shape and brief preparation inside Apply with a conflict against an existing project decision and an overlapping related change. Before asking for approval, the agent should resolve what its authority permits and expose the remaining decision with supporting sources. A deliberate proposed behavior change should remain visible rather than being silently discarded; unavailable evidence should be disclosed. Repeat for a revised brief. An unchanged sufficient brief already approved should not trigger another approval or a separate report. These scenarios have not yet been run.
+
 ## Brief reflection after a change
 
 During this evaluation, ask the agent:

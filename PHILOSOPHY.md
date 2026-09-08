@@ -12,6 +12,8 @@ These are content requirements, not mandatory headings. There is no minimum numb
 
 Record what cannot reliably be recovered from code: intent, product commitments, constraints, and the reasons behind non-obvious decisions. Reference existing interfaces and tests. Code shows the current implementation; it does not by itself prove that it matches the user's intent.
 
+Before requesting approval of a new or revised brief, reconcile it with applicable project decisions, relevant implementation, and related changes. Resolve contradictions within existing authority and expose remaining material conflicts, proposed departures, or missing evidence for the human decision. Intentional changes to existing behavior remain valid proposals. This is part of preparation, not a separate stage, report, or mandatory full-history review.
+
 Clarify an unknown when its answer changes behavior, compatibility, data, or scope. Agents can make local, reversible technical decisions independently. Distinguish assumptions from agreed requirements; writing down a risky assumption does not make it acceptable.
 
 NanoSpec's own documentation and skill sources use English. In a target project, follow the user's requested language and established documentation conventions. Briefs, headings, and explanations can use any natural language; English keywords are not required. Preserve identifiers and exact interface text unless the task calls for changing them. Do not create translated copies just to use NanoSpec.

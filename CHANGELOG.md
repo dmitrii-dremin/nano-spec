@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1 — 2026-09-08
+
+- Require Shape and Apply to reconcile a brief with relevant project decisions, implementation, and related changes before requesting initial or renewed approval. Surface unresolved material conflicts and intentional departures without adding a separate stage, report, full-history review, or repeat approval of an unchanged agreed brief.
+
 ## 0.5.0 — 2026-09-08
 
 - **Breaking:** automatically archive standard file-based changes at `done` under `nanospec/changes/archive/` with a UTC close-out timestamp prefix. Preserve links and identity without a separate archive command or duplicate record.
