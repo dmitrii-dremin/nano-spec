@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.0 — 2026-09-08
+
+- Add `list` to show unfinished changes and their recorded statuses with links. Exclude completed/canceled work by default, expose missing or unknown statuses, and support explicit filters without creating an index or reviewing implementation.
+
 ## 0.5.1 — 2026-09-08
 
 - Require Shape and Apply to reconcile a brief with relevant project decisions, implementation, and related changes before requesting initial or renewed approval. Surface unresolved material conflicts and intentional departures without adding a separate stage, report, full-history review, or repeat approval of an unchanged agreed brief.

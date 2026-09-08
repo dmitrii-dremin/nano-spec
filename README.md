@@ -2,7 +2,7 @@
 
 Ultra lightweight SDD framework. The minimum documentation needed to implement correctly, verify the result, and let another agent continue the work.
 
-Current version: **0.5.1**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
+Current version: **0.6.0**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
 
 ## Get started
 
@@ -10,10 +10,13 @@ Read the [philosophy](PHILOSOPHY.md), then choose the skill you need:
 
 | Skill | When to use it | Result |
 | --- | --- | --- |
+| [list](skills/list/SKILL.md) | See unfinished changes and their recorded statuses | A concise linked list; no review or implementation |
 | [explore](skills/explore/SKILL.md) | Understand existing behavior and its history | A supported account of current behavior, historical intent, and material unknowns |
 | [shape](skills/shape/SKILL.md) | Clarify and prepare a task | A draft for human approval or a specific unresolved question |
 | [apply](skills/apply/SKILL.md) | Implement or resume an approved task | Verified implementation awaiting human acceptance; closure after acceptance |
 | [check](skills/check/SKILL.md) | Independently assess a brief or its implementation | Material gaps or a supported conclusion with verification limits |
+
+List is available as `nano-spec:list`. It shows active records with their statuses, hides `done` and `canceled` by default, and flags unknown or missing status values without rewriting them.
 
 These are independent actions. Calling every skill is unnecessary: `explore` answers research questions, `apply` includes research and verification needed for its own work, and `check` supports a separate review.
 
@@ -36,7 +39,7 @@ codex plugin marketplace add dmitrii-dremin/nano-spec
 codex plugin add nano-spec@nano-spec
 ```
 
-Then start a new task in your project. Restart Codex Desktop if the plugin is not visible. Select the installed NanoSpec skill in the skill picker, or ask the agent to use `nano-spec:shape`, `nano-spec:apply`, `nano-spec:explore`, or `nano-spec:check` explicitly. Versions through 0.3.0 used `nano-spec:nanospec-<action>`; update existing invocations to the shorter names.
+Then start a new task in your project. Restart Codex Desktop if the plugin is not visible. Select the installed NanoSpec skill in the skill picker, or ask the agent to use `nano-spec:shape`, `nano-spec:apply`, `nano-spec:explore`, `nano-spec:check`, or `nano-spec:list` explicitly. Versions through 0.3.0 used `nano-spec:nanospec-<action>`; update existing invocations to the shorter names.
 
 The marketplace and plugin source follow the repository's default branch (`master`), without a pinned Git ref. Refresh the catalog and reinstall to pick up updates; SemVer versions and release tags identify releases without locking installation to them. These commands are supported by the locally checked Codex CLI 0.153.4. See the [Codex plugin documentation](https://developers.openai.com/plugins/build/plugins) for marketplace management. Installation and live skill behavior should be confirmed in the first run; schema validation alone does not prove either.
 
@@ -57,7 +60,7 @@ codex plugin add nano-spec@nano-spec
 
 Start a new task after updating so it loads the new skill instructions.
 
-There is no `init` skill in 0.5.1. Begin with a real task; records are created only when needed.
+There is no `init` skill in 0.6.0. Begin with a real task; records are created only when needed.
 
 The folders in `skills/` are the package sources. Each skill is self-contained. To try a skill directly without installing the plugin, give the agent its path:
 

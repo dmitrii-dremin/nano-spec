@@ -1,6 +1,6 @@
 {
   "name": "nano-spec",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Minimal change-driven development: preserve intent, verify outcomes, and research only what matters.",
   "author": {
     "name": "dmitrii-dremin",
@@ -12,7 +12,7 @@
   "interface": {
     "displayName": "NanoSpec",
     "shortDescription": "Minimal change records for useful agent workflows.",
-    "longDescription": "Explore, shape, implement, and check changes without a maintained specification library or mandatory ceremonies.",
+    "longDescription": "List, explore, shape, implement, and check changes without a maintained specification library or mandatory ceremonies.",
     "developerName": "dmitrii-dremin",
     "category": "Productivity",
     "capabilities": [

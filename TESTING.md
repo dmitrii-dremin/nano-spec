@@ -22,6 +22,8 @@ For the archive workflow, close a standard file-based change and verify that exa
 
 For reconciliation before approval in 0.5.1, exercise both Shape and brief preparation inside Apply with a conflict against an existing project decision and an overlapping related change. Before asking for approval, the agent should resolve what its authority permits and expose the remaining decision with supporting sources. A deliberate proposed behavior change should remain visible rather than being silently discarded; unavailable evidence should be disclosed. Repeat for a revised brief. An unchanged sufficient brief already approved should not trigger another approval or a separate report. These scenarios have not yet been run.
 
+For List, use active records covering all six statuses, a missing status, and a legacy `ready` value. The default result should include the four unfinished states and flag uncertain records, exclude `done`, `canceled`, and the archive, and provide working links. Ask for all changes including the archive to verify the broader scope. An empty or absent directory should produce a clear empty result without creating files. An unreadable source should be reported without claiming the list is complete. Confirm no records, task titles, or implementation files change. These List scenarios have not yet been run.
+
 ## Brief reflection after a change
 
 During this evaluation, ask the agent:
