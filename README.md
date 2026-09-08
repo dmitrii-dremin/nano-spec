@@ -2,7 +2,7 @@
 
 Ultra lightweight SDD framework. The minimum documentation needed to implement correctly, verify the result, and let another agent continue the work.
 
-Current version: **0.4.2**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
+Current version: **0.5.0**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
 
 ## Get started
 
@@ -20,6 +20,8 @@ These are independent actions. Calling every skill is unnecessary: `explore` ans
 In Codex, when the task-title tool is available, Explore and Shape rename the current task to `explore <summary>` and `shape <summary>`; Apply uses `applying <change_name>`, changes it to `implemented <change_name>` when implementation and checks are complete, and to `finished <change_name>` after human acceptance. Resuming work restores `applying`. When a prepared change requires approval, Shape follows its presentation reference to open the record in Codex Desktop or provide a link in other environments. These conveniences do not add an approval gate or prevent work when host tools are unavailable.
 
 The change record is the only core artifact: user intent, acceptance criteria, status, and evidence of completion. File-based changes use one YAML `status`: `draft`, `approved`, `in_progress`, `ready_for_acceptance`, `done`, or `canceled`. Any edit to an approved brief returns it to `draft` for renewed human approval; progress and evidence-only updates do not. Agent verification reaches `ready_for_acceptance`; human acceptance is required for `done`. See the [status rules](PHILOSOPHY.md#change-status).
+
+After `done`, standard file-based changes automatically move to `nanospec/changes/archive/<timestamp>_<name>.md`. The UTC prefix uses `YYYY-MM-DDTHH-mm-ss.SSSZ` and sorts by close-out time; work awaiting acceptance stays active. Archiving is part of Apply, with no separate command.
 
 NanoSpec has no maintained specification library or mandatory documentation index. A completed change records what was verified and accepted at that point; later work can change that behavior. Keep additional notes only when they save costly research.
 
@@ -55,7 +57,7 @@ codex plugin add nano-spec@nano-spec
 
 Start a new task after updating so it loads the new skill instructions.
 
-There is no `init` skill in 0.4.2. Begin with a real task; records are created only when needed.
+There is no `init` skill in 0.5.0. Begin with a real task; records are created only when needed.
 
 The folders in `skills/` are the package sources. Each skill is self-contained. To try a skill directly without installing the plugin, give the agent its path:
 

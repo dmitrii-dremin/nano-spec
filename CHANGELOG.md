@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0 — 2026-09-08
+
+- **Breaking:** automatically archive standard file-based changes at `done` under `nanospec/changes/archive/` with a UTC close-out timestamp prefix. Preserve links and identity without a separate archive command or duplicate record.
+- Keep work awaiting acceptance active; handle repeated closure and explicit reopening, and include archived records in focused history research. Existing history is not bulk-migrated.
+
 ## 0.4.2 — 2026-09-08
 
 - In Codex, rename Apply tasks to `implemented <change_name>` after implementation and verification, and `finished <change_name>` after human acceptance. Restore `applying <change_name>` when work resumes or the brief returns to draft.

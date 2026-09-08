@@ -11,7 +11,7 @@ Use the user's requested language for communication and follow the target projec
 
 At the start of this workflow in Codex, when `mcp__codex_app__set_thread_title` is available, rename the current task to `shape <summary>` by passing `title` and omitting `threadId`. Summarize the invocation's requested change in a few words, using the user's language and the literal prefix `shape`. Use the triggering request if no explicit argument was supplied. Rename once per invocation; if the tool is unavailable or fails, continue preparation without blocking or claiming success. Do not create a new task.
 
-Read the request, applicable project instructions, and any existing brief. Find relevant existing documentation, code, tests, and past changes through the affected behavior; follow material dependencies without loading the whole project archive. A past completed change provides intent and evidence at completion, not a guarantee about today's implementation.
+Read the request, applicable project instructions, and any existing brief. Find relevant existing documentation, code, tests, and past changes through the affected behavior; include `nanospec/changes/archive/` in targeted history searches and follow material dependencies without loading the whole project archive. A past completed change provides intent and evidence at completion, not a guarantee about today's implementation.
 
 Establish the intended outcome and reason, observable acceptance criteria, material constraints, and verification method. Use examples where they resolve ambiguity. Prefer references to precise existing sources over retelling them. State concrete boundaries when their absence could expand the task.
 

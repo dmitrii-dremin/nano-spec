@@ -18,6 +18,8 @@ For the approval clarification in 0.4.1, compare a fully specified format conver
 
 For completion titles introduced after 0.4.1, verify that Apply changes `applying <change_name>` to `implemented <change_name>` at `ready_for_acceptance` and to `finished <change_name>` only after human acceptance. Resuming implementation or revising the brief should restore `applying`. Invoking Apply to report an already verified or accepted result should preserve its matching completion title. Missing title tools must not block work. This title-transition scenario has not yet been run.
 
+For the archive workflow, close a standard file-based change and verify that exactly one record moves into `nanospec/changes/archive/` with a real UTC timestamp, `done` status, preserved evidence, and working relative/incoming navigation links. A result awaiting acceptance must stay active. Repeat close-out to check that no second prefix or duplicate appears; test an existing destination without overwriting it. Explore should find the record through its original name and distinguish closure order from implementation order. An explicitly reopened change should return to its active path; unrelated history and issue-based briefs should stay in place. These archive scenarios have not yet been run.
+
 ## Brief reflection after a change
 
 During this evaluation, ask the agent:
