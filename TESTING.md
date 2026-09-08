@@ -31,7 +31,9 @@ For the Shape interaction workflow, exercise these cases in a project with real 
 - Invoke Shape with no target: the full default List result appears before a selector with two grounded candidates and native free-text name entry. Selecting an apply recommendation must not silently start implementation. Exercise manual input, ambiguous names, fewer than two suitable candidates, and no records.
 - An asynchronous question with a preselected option and no reply must remain pending; explicit mode choices already in the request should not be asked again. If the host has no usable question tool, the same choice should be requested in conversation. A new task description should bypass existing-change selection; selecting an approved record should preserve its approval unless the brief changes.
 
-These Shape interaction scenarios have not yet been run.
+Observed on 2026-09-09 with 0.7.0: a no-target Shape invocation displayed six draft records in commentary, called `request_user_input_async`, received `accepted: true`, and ended the turn about six seconds later without a user reply. The final response referred to a form and omitted the list; the user's screenshot showed neither the form nor the list. The exact UI cause is unverified.
+
+For the 0.7.1 fix, confirm in a live task that acknowledgement alone leaves the turn waiting and that a delayed answer resumes selection. Check that repeated waits neither duplicate the question nor treat timeout as a choice. If the form or wait mechanism is unavailable, the visible fallback must include the list and actual options. Host-level smoke check on 2026-09-09: `request_user_input_async` returned `accepted: true`; the turn remained open through two bounded `clock.sleep` calls, and a delayed user answer confirmed the form was visible and interrupted the wait. This verifies the waiting mechanism, not the full installed Shape flow. Full change selection, review-mode progression, and fallback scenarios remain pending.
 
 ## Brief reflection after a change
 

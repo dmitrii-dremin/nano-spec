@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1 — 2026-09-09
+
+- Fix Shape ending the turn immediately after an asynchronous question acknowledgement. Keep pending questions active with host waiting, and provide a complete text fallback when the form is unavailable instead of referring to hidden options.
+
 ## 0.7.0 — 2026-09-09
 
 - Add structured manual/interactive review selection before shaping an existing draft. Manual review opens the record and waits; interactive review asks only material clarification questions and preserves the final approval boundary.
