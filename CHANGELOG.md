@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.2 — 2026-09-08
+
+- In Codex, rename Apply tasks to `implemented <change_name>` after implementation and verification, and `finished <change_name>` after human acceptance. Restore `applying <change_name>` when work resumes or the brief returns to draft.
+
 ## 0.4.1 — 2026-09-07
 
 - Clarify the existing approval boundary: an implementation request approves what it and agreed references determine, not material product decisions the agent subsequently introduces. Routine technical choices within the agreed scope remain autonomous; task size alone adds no approval stage.

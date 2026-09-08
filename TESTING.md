@@ -16,6 +16,8 @@ When testing the new statuses, revise an approved brief, including a wording-onl
 
 For the approval clarification in 0.4.1, compare a fully specified format conversion with a broad request for a management page whose actions and persistence behavior are unspecified. The conversion should proceed without repeat permission when no material decisions are missing. For the page, the agent should research and present its proposed product decisions for approval before dependent implementation. A detailed, already agreed page brief should remain directly implementable regardless of size; ordinary technical choices should stay autonomous. These focused scenarios have not yet been run.
 
+For completion titles introduced after 0.4.1, verify that Apply changes `applying <change_name>` to `implemented <change_name>` at `ready_for_acceptance` and to `finished <change_name>` only after human acceptance. Resuming implementation or revising the brief should restore `applying`. Invoking Apply to report an already verified or accepted result should preserve its matching completion title. Missing title tools must not block work. This title-transition scenario has not yet been run.
+
 ## Brief reflection after a change
 
 During this evaluation, ask the agent:
