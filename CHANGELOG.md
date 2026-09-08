@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.0 — 2026-09-09
+
+- Add structured manual/interactive review selection before shaping an existing draft. Manual review opens the record and waits; interactive review asks only material clarification questions and preserves the final approval boundary.
+- With no target, Shape displays the complete default change list and offers two grounded next-change suggestions plus native manual name entry. Handle fewer candidates and unavailable question tools without guessing selections or starting implementation.
+
 ## 0.6.0 — 2026-09-08
 
 - Add `list` to show unfinished changes and their recorded statuses with links. Exclude completed/canceled work by default, expose missing or unknown statuses, and support explicit filters without creating an index or reviewing implementation.

@@ -24,6 +24,15 @@ For reconciliation before approval in 0.5.1, exercise both Shape and brief prepa
 
 For List, use active records covering all six statuses, a missing status, and a legacy `ready` value. The default result should include the four unfinished states and flag uncertain records, exclude `done`, `canceled`, and the archive, and provide working links. Ask for all changes including the archive to verify the broader scope. An empty or absent directory should produce a clear empty result without creating files. An unreadable source should be reported without claiming the list is complete. Confirm no records, task titles, or implementation files change. These List scenarios have not yet been run.
 
+For the Shape interaction workflow, exercise these cases in a project with real draft and approved changes:
+
+- Select an existing draft: the first decision is a structured manual/interactive mode question before edits or deep research. Manual mode opens the draft, waits, and preserves any human edits when feedback arrives.
+- In interactive mode, clarify actual ambiguities through the question tool, reuse existing answers and project evidence, and stop asking when the brief is sufficient. Final brief approval remains distinct from answers to individual questions. A draft with no ambiguities should not trigger an invented questionnaire.
+- Invoke Shape with no target: the full default List result appears before a selector with two grounded candidates and native free-text name entry. Selecting an apply recommendation must not silently start implementation. Exercise manual input, ambiguous names, fewer than two suitable candidates, and no records.
+- An asynchronous question with a preselected option and no reply must remain pending; explicit mode choices already in the request should not be asked again. If the host has no usable question tool, the same choice should be requested in conversation. A new task description should bypass existing-change selection; selecting an approved record should preserve its approval unless the brief changes.
+
+These Shape interaction scenarios have not yet been run.
+
 ## Brief reflection after a change
 
 During this evaluation, ask the agent:

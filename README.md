@@ -2,7 +2,7 @@
 
 Ultra lightweight SDD framework. The minimum documentation needed to implement correctly, verify the result, and let another agent continue the work.
 
-Current version: **0.6.0**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
+Current version: **0.7.0**. The philosophy and skills are experimental; their effectiveness still needs to be tested on real tasks.
 
 ## Get started
 
@@ -17,6 +17,8 @@ Read the [philosophy](PHILOSOPHY.md), then choose the skill you need:
 | [check](skills/check/SKILL.md) | Independently assess a brief or its implementation | Material gaps or a supported conclusion with verification limits |
 
 List is available as `nano-spec:list`. It shows active records with their statuses, hides `done` and `canceled` by default, and flags unknown or missing status values without rewriting them.
+
+In Shape, invoking `nano-spec:shape` without a target first displays the full default List result, then asks which change to discuss through the host's question tool: two relevant candidates plus manual name entry. Selecting an existing `draft` asks for manual or interactive review. Manual review opens the record and waits for feedback; interactive review asks focused questions to resolve ambiguities. Selecting a change or review mode does not approve the brief or start implementation.
 
 These are independent actions. Calling every skill is unnecessary: `explore` answers research questions, `apply` includes research and verification needed for its own work, and `check` supports a separate review.
 
@@ -60,7 +62,7 @@ codex plugin add nano-spec@nano-spec
 
 Start a new task after updating so it loads the new skill instructions.
 
-There is no `init` skill in 0.6.0. Begin with a real task; records are created only when needed.
+There is no `init` skill in 0.7.0. Begin with a real task; records are created only when needed.
 
 The folders in `skills/` are the package sources. Each skill is self-contained. To try a skill directly without installing the plugin, give the agent its path:
 

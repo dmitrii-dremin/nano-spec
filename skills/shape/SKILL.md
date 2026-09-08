@@ -1,6 +1,6 @@
 ---
 name: shape
-description: Prepare or clarify a NanoSpec task brief before implementation, defining behavior, constraints, and verification. A request to prepare a brief alone does not authorize implementation.
+description: Prepare or clarify a NanoSpec task brief before implementation. With no target, list changes for selection; for an existing draft, offer manual or interactive review. Shaping alone does not authorize implementation.
 ---
 
 # NanoSpec Shape
@@ -9,7 +9,9 @@ Prepare the minimum information needed to complete the task correctly. Each piec
 
 Use the user's requested language for communication and follow the target project's conventions for documentation, unless the user directs otherwise. Accept briefs in any natural language; English headings or keywords are not required. Preserve identifiers, paths, commands, and exact interface text unless changing them is part of the task. Do not create translations solely to use this skill.
 
-At the start of this workflow in Codex, when `mcp__codex_app__set_thread_title` is available, rename the current task to `shape <summary>` by passing `title` and omitting `threadId`. Summarize the invocation's requested change in a few words, using the user's language and the literal prefix `shape`. Use the triggering request if no explicit argument was supplied. Rename once per invocation; if the tool is unavailable or fails, continue preparation without blocking or claiming success. Do not create a new task.
+Before ordinary shaping, identify whether the request supplies a target and whether an existing target is `draft`. If there is no target, or an existing draft is selected, read and follow [Choose a change and review mode](references/review-interaction.md): show the complete default List result and a structured selector when no target exists; ask manual versus interactive review before editing or deeply researching an existing draft. Wait for the user's choices. A new task description proceeds through ordinary shaping without an unnecessary selection menu.
+
+Once the target is identified in Codex, when `mcp__codex_app__set_thread_title` is available, rename the current task to `shape <summary>` by passing `title` and omitting `threadId`. Summarize the invocation's requested or selected change in a few words, using the user's language and the literal prefix `shape`. Rename once per invocation; if the tool is unavailable or fails, continue preparation without blocking or claiming success. Do not create a new task.
 
 Read the request, applicable project instructions, and any existing brief. Find relevant existing documentation, code, tests, and past changes through the affected behavior; include `nanospec/changes/archive/` in targeted history searches and follow material dependencies without loading the whole project archive. A past completed change provides intent and evidence at completion, not a guarantee about today's implementation.
 

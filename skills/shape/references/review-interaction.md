@@ -1,0 +1,29 @@
+# Choose a change and review mode
+
+Use this interaction before ordinary shaping when no target was supplied or the selected existing record is `draft`. Keep prompts, choices, and explanations in the user's language. A usable change name, path, or task description in the triggering request counts as a target even without a formal argument. Do not invent a target from unrelated earlier work.
+
+## Ask through the host's question tool
+
+Use an available structured user-question tool for change selection, review-mode selection, and interactive clarification. In Codex, prefer `functions.request_user_input_async` when available; use `functions.request_user_input` only when the current mode and its tool rules allow it. Other agents may expose an equivalent tool. Follow the actual schema and permitted uses instead of inventing arguments or switching modes just to ask.
+
+An asynchronous call does not contain the answer: keep the choice pending until the user replies. A preselected option, silence, interruption, or elapsed time is not a decision. Do not proceed with work dependent on that choice. Preserve a choice already explicitly supplied for this review without asking it again. If no usable question tool exists or the call fails, ask the same question in the conversation and wait; do not silently choose a mode.
+
+## No target supplied
+
+First display the complete default List result in a conversation message: all active unfinished changes with their recorded statuses and links. Use the same scope as List: the project's configured location or `nanospec/changes/`, excluding `archive/`, `done`, and `canceled`. Flag missing or unknown statuses instead of inferring readiness. Do not create an index, silently truncate the result, or require the user to invoke List separately. Read metadata initially; inspect only promising candidates enough to support the recommendations below.
+
+Then use the question tool to offer the two most sensible next changes. Prefer explicit user priorities, work that unblocks the current goal, and known satisfied dependencies. Label each with its exact name and likely next action: refine a `draft`, apply an `approved` brief, or resume `in_progress` work. Explain the recommendation briefly using observed facts; do not assert readiness from a label alone or load the full archive to rank candidates. Exclude `ready_for_acceptance` from refine/apply recommendations unless there is an explicit need to revise it. It remains in the displayed list.
+
+Provide manual change-name entry as the third selection path. When the tool already supplies a free-text/Other field, use that native field alongside the two suggested answers, without adding a duplicate Other option. If the host supports a custom-input choice instead, use it; selecting a manual-entry button without text requires a follow-up free-text question. Offer fewer candidates when fewer are suitable; never invent records to fill two slots. With no candidates, show the empty result or limitation and ask for a change name or new task description through free text.
+
+Validate a typed name against the actual records; clarify ambiguous or missing matches rather than creating or selecting a change silently. Selecting a record chooses what to discuss in Shape. It does not approve its contents or authorize implementation, even if the recommendation says apply. An explicit user request to implement is handled under the normal Apply authorization rules. After selection, continue below for an existing `draft`; otherwise use ordinary Shape behavior without resetting an unchanged approved brief merely because it was selected.
+
+## Existing draft: ask the mode first
+
+Read only enough to identify the record and confirm `draft`, then ask: "Would you like to review this change manually or interactively?" Offer `Manual review` and `Interactive review`. Ask before editing, deep research, or proposing refinements. Choosing a mode is not approval of the brief.
+
+For manual review, use the host preview/link behavior in [Present a change](present-change.md) to open the current record. This is an invitation to inspect a draft, not a claim that it has passed reconciliation or is approved. Provide its link and wait for the user's feedback or explicit decision. Do not modify the record, begin implementation, or continue an unsolicited interview while waiting. When feedback arrives, reread the record to preserve the user's edits and apply the requested revisions. Perform the required reconciliation before a subsequent approval request or acting on an approval; if it exposes a material conflict, surface the conflict rather than silently treating approval as resolution.
+
+For interactive review, inspect the brief and relevant project evidence to find material ambiguities. Ask only questions whose answers affect behavior, scope, constraints, acceptance criteria, or verification and cannot already be established from the request or available evidence. Use the question tool for every clarification round, in small batches; explain concrete alternatives and their consequences when useful. Apply answers to the same draft and avoid asking again about resolved decisions. Ordinary reversible implementation choices remain with the agent. Do not turn this into a generic questionnaire or ask for facts cheaply recoverable from code.
+
+When no material ambiguities remain, stop the interview, reconcile the resulting brief, and present it for explicit approval under the normal Shape rules. Do not manufacture questions to fill a quota. Answers to individual questions do not automatically approve the entire revised brief. This interaction adds no implementation authority or new artifact.
