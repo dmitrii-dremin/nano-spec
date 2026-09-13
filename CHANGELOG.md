@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.2 — 2026-09-14
+
+- Keep follow-up requests during Apply in the current change by default, including brief revisions and acceptance feedback. Ask before splitting an unrelated outcome into another change, preserve explicit user routing decisions, and retain the normal approval rules for revised briefs.
+
 ## 0.7.1 — 2026-09-09
 
 - Fix Shape ending the turn immediately after an asynchronous question acknowledgement. Keep pending questions active with host waiting, and provide a complete text fallback when the form is unavailable instead of referring to hidden options.

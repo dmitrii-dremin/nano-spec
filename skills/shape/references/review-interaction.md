@@ -2,6 +2,8 @@
 
 Use this interaction before ordinary shaping when no target was supplied or the selected existing record is `draft`. Keep prompts, choices, and explanations in the user's language. A usable change name, path, or task description in the triggering request counts as a target even without a formal argument. Do not invent a target from unrelated earlier work.
 
+Follow-up revisions to an ongoing Apply task already target its current change. Apply concrete revisions the user has requested without restarting change selection or asking for a review mode; ask only about remaining material ambiguities. An explicit request to review that draft still uses the review-mode choice below unless the user already selected a mode. A bare Shape invocation without a follow-up request still uses the no-target selector.
+
 ## Ask through the host's question tool
 
 Use an available structured user-question tool for change selection, review-mode selection, and interactive clarification. In Codex, prefer `functions.request_user_input_async` when available; use `functions.request_user_input` only when the current mode and its tool rules allow it. Other agents may expose an equivalent tool. Follow the actual schema and permitted uses instead of inventing arguments or switching modes just to ask.
